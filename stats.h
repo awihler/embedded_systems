@@ -14,7 +14,7 @@
  * Intro to Embedded Systems Software and Dev - U of Colorado Boulder
  * Course1 - Module1
  * Programming assignment to create a simple application that performs 
- * statistical analytics on a dataset.
+ * statistical analytics on an array of unsigned char data items.
  *
  * @author Andrew Wihler
  * @date 12.APR.2020
@@ -23,20 +23,86 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
+/**
+ * @brief Print an array
+ *
+ * A function that prints an array of unsigned char data items 
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ */
+void print_array(unsigned char * data, unsigned int size);
 
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Print the statistics of an array
  *
- * <Add Extended Description Here>
+ * A function that prints the statistics of an array including :  
+ * minimum, maximum, mean, and median.
  *
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
  *
- * @return <Add Return Informaiton here>
  */
+void print_statistics(unsigned char * data, unsigned int size);
 
+/**
+ * @brief Sort an array
+ *
+ * A function that reorders an array of unsigned char data items from large to small
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ */
+void sort_array(unsigned char * data, unsigned int size);
+
+/**
+ * @brief Calculate the mean
+ *
+ * A function that calculates the mean of an array of unsigned char data items 
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ * @return mean
+ */
+float find_mean(unsigned char * data, unsigned int size);
+
+/**
+ * @brief Calculate the median
+ *
+ * A function that calculates the median of an array of unsigned char data items 
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ * @return median
+ */
+float find_median(unsigned char * data, unsigned int size);
+
+/**
+ * @brief Calculate the maximum value
+ *
+ * A function that calculates the maximum value of an array of unsigned char data items 
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ * @return maximum value
+ */
+unsigned char find_maximum(unsigned char * data, unsigned int size);
+
+/**
+ * @brief Calculate the minimum value
+ *
+ * A function that calculates the minimum value of an array of unsigned char data items 
+ *
+ * @param  data  An array of unsigned char data items
+ * @param  size  Number of items in array
+ *
+ * @return minimum value
+ */
+unsigned char find_minimum(unsigned char * data, unsigned int size);
 
 #endif /* __STATS_H__ */
