@@ -21,8 +21,6 @@
  *
  */
 
-
-
 #include <stdio.h>
 #include "stats.h"
 
@@ -39,7 +37,14 @@ void main() {
 
   
   /* Statistics and Printing Functions */
+  printf("input ARRAY:\n");
+  print_array(test, SIZE);
 
+  printf("sorted ARRAY:\n");
+  sort_array(test, SIZE); 
+  print_array(test, SIZE);
+
+  print_statistics(test, SIZE);
   
 }
 
@@ -47,29 +52,101 @@ void main() {
 
 void print_array(unsigned char * data, unsigned int size){
   
+  int i;  
+
+  for(i=0; i<size; i++){
+    if(i == size-1){
+      printf("%u \n", data[i]);
+    }else{
+      printf("%u, ", data[i]);
+    }    
+  }
+ 
 }
 
 void print_statistics(unsigned char * data, unsigned int size){
-
+  printf("Mean    = %.0f \n", find_mean(data, size));
+  printf("Median  = %.0f \n", find_median(data, size));
+  printf("Maximum = %u \n", find_maximum(data, size));
+  printf("Minimum = %u \n", find_minimum(data, size));
 }
 
 void sort_array(unsigned char * data, unsigned int size){
+  
+  unsigned char temp;
+  int i, j;
+
+  for(i=0; i < size-1; i++){
+    for(j=i+1; j < size; j++){
+
+      /* ascending: data[i] > data[j]    
+       * descending: data[i] < data[j] */ 
+      if(data[i] < data[j]){
+        temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+      }
+    }
+  }
 
 }
 
 float find_mean(unsigned char * data, unsigned int size){
 
+  float sum = 0;
+  int i;
+
+  for(i=0; i < size; i++){
+    sum += data[i];
+  }
+
+  return sum/size;
+
 }
 
 float find_median(unsigned char * data, unsigned int size){
+
+  float median;
+
+  sort_array(data, size);
+
+  if(size % 2 == 0){
+    median = (data[size/2] + data[size/2 - 1])/2.0;
+  }else{
+    median = data[size/2];
+  }
+ 
+  return median;
 
 }
 
 unsigned char find_maximum(unsigned char * data, unsigned int size){
 
+  unsigned int max = data[0];
+  int i;
+
+  for(i=0; i<size; i++){
+    if(data[i] > max){
+      max = data[i];
+    }
+  } 
+
+ return max;
+
 }
 
 unsigned char find_minimum(unsigned char * data, unsigned int size){
+
+  unsigned int min = data[0];
+  int i;
+
+  for(i=0; i<size; i++){
+    if(data[i] < min){
+      min = data[i];
+    }
+  } 
+
+ return min;
 
 }
 
