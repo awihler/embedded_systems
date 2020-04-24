@@ -26,11 +26,9 @@
 #   <FILE>.asm		- Builds <FILE>.asm assembly output file of c-files
 #   <FILE>.o		- Builds <FILE>.o object file for all c-files (not linked)
 #   <FILE>.d		- Builds <FILE>.d dependency file for all c-files
-#   compile-all		- Compile all object files, but DOES NOT link
-#   build	   	- Builds and links all source files into a final executable
-#   <TARGET>.out   	- Builds and links all source files into a final executable
-#   <TARGET>.asm   	- Builds <TARGET>.asm assembly file for the <TARGET>.out	
-#   clean 	   	- Rsemoves all generated files      
+#   compile-all		- Compiles all object files, but DOES NOT link
+#   build	   	- Builds and links all source files into a final executable	
+#   clean 	   	- Removes all generated files      
 #
 # Platform Overrides:
 #   CPU		- ARM Cortex Architecture (cortex-m0plus, cortex-m4)
@@ -47,7 +45,9 @@ PLATFORM=HOST
 
 # Architecture Specific Flags
 CPU = cortex-m4
-ARCH = thumb
+INSTR = thumb
+ARCH = armv7e-m
+ABI = hard
 FPU = fpv4-sp-d16
 SPECS = nosys.specs
 LINKER_FILE = ../msp432p401r.lds
@@ -62,9 +62,9 @@ ifeq ($(PLATFORM), MSP432)
 
 	# Compile Flags
 	ARCHFLAGS = -mcpu=$(CPU) \
-		    -m$(ARCH) \
-		    -march=armv7e-m \
-		    -mfloat-abi=hard \
+		    -m$(INSTR) \
+		    -march=$(ARCH) \
+		    -mfloat-abi=$(ABI) \
 		    -mfpu=$(FPU) \
 		    --specs=$(SPECS)
 
@@ -87,35 +87,36 @@ endif
 
 # Pattern matching
 OBJS = $(SOURCES:.c=.o)
-ASSEMBLY = $(SOURCES:.c=.asm)
-PREPROC = $(SOURCES:.c=.i)
 DEPS = $(SOURCES:.c=.d)
 
 # Define output files to remove with Clean Target:
-FILES = *.i *.asm *.o *.d
+FILES = *.i *.asm *.o *.d *.map *.out
 
 # Build Targets
 %.i : %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $< -o $@  
+	$(CC) $(CFLAGS) $(INCLUDES) $(CPPFLAGS) $^ -o $@  
 
 %.asm : %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -S $< -o $@ 
+	$(CC) $(CFLAGS) $(INCLUDES) -S $^ -o $@ 
 
 %.o : %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
 
 %.d : %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -M $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -MM $^ -o $@
 
 .PHONY: compile-all
 compile-all: $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES) -c $(OBJS) -o $@
+
+OBJS: $(SOURCES) $(INCLUDES)
+	$(CC) -c $(SOURCES) -o $@ 
 
 .PHONY: build
-build: $(TARGET).out 
+build: $(TARGET).out $(TARGET).asm
 
 $(TARGET).out: $(OBJS) $(DEPS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES) $(OBJS) -o $@
+	$(SIZE) -Atd $@
 	$(SIZE) $@
 
 $(TARGET).asm : $(TARGET).out
@@ -123,7 +124,7 @@ $(TARGET).asm : $(TARGET).out
 
 .PHONY: clean
 clean: 
-	rm -f $(PREPROC) $(ASSEMBLY) $(OBJS) $(DEPS) $(TARGET).out $(TARGET).map $(FILES)
+	rm -f $(FILES)
 
 
 
