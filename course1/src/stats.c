@@ -23,52 +23,30 @@
 
 #include <stdio.h>
 #include "stats.h"
+#include "platform.h"
 
-/* Size of the Data Set */
-#define SIZE (40)
-
-void main() {
-
-  unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
-                              114, 88,   45,  76, 123,  87,  25,  23,
-                              200, 122, 150, 90,   92,  87, 177, 244,
-                              201,   6,  12,  60,   8,   2,   5,  67,
-                                7,  87, 250, 230,  99,   3, 100,  90};
-
-  
-  /* Statistics and Printing Functions */
-  printf("input ARRAY:\n");
-  print_array(test, SIZE);
-
-  printf("sorted ARRAY:\n");
-  sort_array(test, SIZE); 
-  print_array(test, SIZE);
-
-  print_statistics(test, SIZE);
-  
-}
 
 /* Code for Functions */
 
 void print_array(unsigned char * data, unsigned int size){
-  
-  int i;  
 
-  for(i=0; i<size; i++){
-    if(i == size-1){
-      printf("%u \n", data[i]);
-    }else{
-      printf("%u, ", data[i]);
-    }    
-  }
- 
+  #if defined (VERBOSE)  
+    int i; 
+    for(i=0; i<size; i++){
+      if(i == size-1){
+        PRINTF("%u \n", data[i]);
+      }else{
+        PRINTF("%u, ", data[i]);
+      }    
+    }
+  #endif
 }
 
 void print_statistics(unsigned char * data, unsigned int size){
-  printf("Mean    = %.0f \n", find_mean(data, size));
-  printf("Median  = %.0f \n", find_median(data, size));
-  printf("Maximum = %u \n", find_maximum(data, size));
-  printf("Minimum = %u \n", find_minimum(data, size));
+  PRINTF("Mean    = %.0f \n", find_mean(data, size));
+  PRINTF("Median  = %.0f \n", find_median(data, size));
+  PRINTF("Maximum = %u \n", find_maximum(data, size));
+  PRINTF("Minimum = %u \n", find_minimum(data, size));
 }
 
 void sort_array(unsigned char * data, unsigned int size){
@@ -80,7 +58,7 @@ void sort_array(unsigned char * data, unsigned int size){
     for(j=i+1; j < size; j++){
 
       /* ascending: data[i] > data[j]    
-       * descending: data[i] < data[j] */ 
+        descending: data[i] < data[j] */ 
       if(data[i] < data[j]){
         temp = data[i];
         data[i] = data[j];
@@ -88,7 +66,6 @@ void sort_array(unsigned char * data, unsigned int size){
       }
     }
   }
-
 }
 
 float find_mean(unsigned char * data, unsigned int size){
@@ -131,7 +108,7 @@ unsigned char find_maximum(unsigned char * data, unsigned int size){
     }
   } 
 
- return max;
+  return max;
 
 }
 
@@ -146,7 +123,7 @@ unsigned char find_minimum(unsigned char * data, unsigned int size){
     }
   } 
 
- return min;
+  return min;
 
 }
 

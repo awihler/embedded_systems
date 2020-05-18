@@ -17,12 +17,11 @@
  *
  */
 
-#include <stdint.h>
-#include "course1.h"
-#include "platform.h"
-#include "memory.h"
-#include "data.h"
-#include "stats.h"
+#include "course1.h" 
+#include "platform.h" 
+#include "memory.h"   
+#include "data.h"  
+#include "stats.h"  
 
 int8_t test_data1() {
   uint8_t * ptr;
