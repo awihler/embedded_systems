@@ -20,7 +20,10 @@
  * @date April 1 2017
  *
  */
+#include "data.h"
 #include "memory.h"
+#include "stats.h"
+#include <stdio.h>
 
 /***********************************************************
  Function Definitions
@@ -50,80 +53,125 @@ void clear_all(char * ptr, unsigned int size){
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
 
-  uint8_t i = 0;
-  uint8_t *temp;
-  temp = (uint8_t*)reserve_words(length);
-	
-  for( i = 0; i < length; i++){
-    *(temp + i ) = *( src + i );
-  }
+	uint8_t i = 0;
+	uint8_t *temp;
 
-  for( i = 0; i < length; i++){
-    *(dst + i ) = *( temp + i );
-  }
+	// Allocate dynamic memory
+	temp = (uint8_t*)reserve_words(length);
 	
-  return dst;
-  free_words((uint32_t*)temp);
+	for( i = 0; i < length; i++){
+	    *(temp + i ) = *( src + i );
+	}
 
+	for( i = 0; i < length; i++){
+	    *(dst + i ) = *( temp + i );
+			}
+	
+	return dst;
+
+	// Deallocate dynamic memory
+	free_words((uint32_t*)temp);
 }
 
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
 	
-  uint8_t i = 0;
+	uint8_t i = 0;
 
-  for( i = 0; i < length; i++){
-    *( dst + i ) = *( src + i );
-  }
+	for( i = 0; i < length; i++){
+		*( dst + i ) = *( src + i );
+	}
 
-  return dst;
+	return dst;
 
 }
 
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
 
-  uint8_t i = 0;	
+	uint8_t i = 0;	
 	
-  for( i = 0; i < length; i++){
-    *( src + i ) = value ;
-  }
+	for( i = 0; i < length; i++){
+		*( src + i ) = value ;
+	}
 
-  return src;
+	return src;
 
 }
 
 uint8_t * my_memzero(uint8_t * src, size_t length) {
 
-  src = my_memset(src , length , 0 );
+	src = my_memset(src , length , 0 );
 
-  return src;
+	return src;
 
 }
 
 uint8_t * my_reverse(uint8_t * src, size_t length) {
 
-  uint8_t i = 0;
-  int32_t temp;
-  for ( i = 0; i <= (length-1)/2; i++){
-    temp = *(src + i );
-    *(src + i ) = *( src + length - i - 1);
-    *( src + length - i - 1) = temp;
-  } 
+	int32_t temp;
+	uint8_t i = 0;
 
-  return src;
+	for (i = 0; i <= (length-1)/2; i++){
+		temp = *(src + i);
+		*(src + i) = *(src + length - i - 1);
+		*(src + length - i - 1) = temp;
+	} 
 
+/*	uint8_t start=0;
+	uint8_t end=length-1;
+
+	while(start < end){
+		temp = src[start];
+		src[start] = src[end];
+		src[end] = temp;
+		start++;
+		end--;
+	}	*/
+
+	return src;
 }
 
 int32_t * reserve_words(size_t length) {
 
-  int32_t *ptr;
-  ptr  = ( int32_t *)malloc(length * sizeof(int32_t));
+	int32_t *ptr;
 
-  return ptr;
+	// Allocate dynamic memory
+	ptr  = (int32_t *) malloc(length * sizeof(int32_t));
 
+	#ifdef VERBOSE
+	int i;
+	printf("--------------------------------\n");
+	printf("reserve_words(size_t length):\n");
+
+	// Check if the memory has been successfully allocated by malloc or not 
+	if (ptr == NULL) { 
+		printf("	Memory not allocated using malloc.\n"); 
+		exit(0); 
+    } 
+    else {
+        // Memory has been successfully allocated 
+        printf("	Memory successfully allocated using malloc.\n"); 
+  
+        // Print the elements of the array 
+		printf("	Maximum string size: %zu\n", length);
+        printf("	The initialised elements of the array are: "); 
+
+        for (i = 0; i < length; ++i) { 
+			if(i == length-1){
+				printf("%d", ptr[i]);
+			}else{
+				printf("%d, ", ptr[i]);
+			}    
+		} 
+    }
+
+	printf("\n");	
+	#endif
+
+	return ptr;
 }
 
 void free_words(uint32_t * src){
 
-  free(src);
+	free(src);
 
 }

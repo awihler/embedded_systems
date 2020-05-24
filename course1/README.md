@@ -6,27 +6,28 @@
 This repository contains the: 
 **Peer-Graded Assignment: Week 4 Expanded Build System and Memory** \
 \
-This assignment reuses the version control repository from Week 1 and adds some new c-programming functions that manipulate memory. The code is tested on the host machine, but should compile for both the target platform and host platform.  \
+This assignment reuses the version control repository from Week 1 and adds new c-programming functions that manipulate memory. The code is tested on the host machine, but should compile for both the target platform (MSP432) and host platform.  \
+
+###project directory structure
+
+- *Makefile*
+- *source.mk*
+- *msp432p401r.lds*
+- **src** (source files *.c)
+	- *main.c* : Main function needed to call test functions (in course1.c)
+	- *memory.c* : Memory movement and manipulation functions
+	- *data.c* : Integer-to-ASCII and ASCII-to-Integer function
+	- *stats.c* : Contains print_array() function (enabled/disabled using a compile time switch VERBOSE)
+	- *course1.c* : Course assessment functions
+	- *interrupts_msp432p401r_gcc.c* : Target embedded system files
+	- *startup_msp432p401r_gcc.c* : Target embedded system files
+	- *system_msp432p401r.c* : Target embedded system files 
+- **include** (header files *.h)
+- **pre** (preprocessing files *.i)
+- **asm** (assembly files *.asm)
+- **obj** (object files *.o)
+- **dep** (dependencies *.d)
 \
-**‘src’ folder** : contains source files (*.c) \
-- *main.c* : Main function needed to call test functions (in course1.c).
-- *memory.c* : Contains basic memory movement and manipulation options.
-- *data.c* : Contains both an Integer-to-ASCII and ASCII-to-Integer function.
-- *stats.c* : Contains the print_array() function that is enabled/disabled using a compile time switch (VERBOSE flag in the makefile; -DVERBOSE).
-- *course1.c* : Contains the course assessment functions. \
 \
-The src folder also contains the target embedded system files:
-- *interrupts_msp432p401r_gcc.c*
-- *startup_msp432p401r_gcc.c*
-- *system_msp432p401r.c*  \
-\
-**‘include’ folder** : contains all header files (*.h) \
-The Make file has been modfied to automatically generate a obj directory for locating all the .o object files.  The traget output file (.out) is located with the Make file at the top of the project directory. \
-\
-**project directory structure**
-- Makefile
-- source.mk
-- target.out
-- include (header files *.h)
-- src (source files *.c)
-- obj (object files *.o)
+The Make file has been modfied to automatically generate and order all generated files into the appropriate folders (**pre**, **asm**, **obj**, **dep**).  The target output file (.out) is saved to the top of the project directory. 
+

@@ -33,6 +33,7 @@
 
 #define BASE_16 (16)
 #define BASE_10 (10)
+#define BASE_02 (2)
 
 /**
  * @brief function to run course1 materials

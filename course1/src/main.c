@@ -39,7 +39,8 @@ int main(void) {
     unsigned int i;
     char value;
 
-    /* Code below does some arbitrary memory Reads & writes */
+    /* Code below does some arbitrary memory Reads & writes 
+       (c1m2 Assignment)*/
     clear_all(buffer, MAX_LENGTH);
     set_all( ( buffer + 8 ), 43, 2); 
     set_value(buffer, 0, 0x61);
