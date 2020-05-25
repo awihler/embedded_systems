@@ -32,15 +32,15 @@ char buffer[MAX_LENGTH];
 /* A pretty boring main file */
 int main(void) {
 
-  #if defined (COURSE1)
-    course1();
+	#if defined (COURSE1)
+	course1();
 
-  #else
-    unsigned int i;
-    char value;
+	#else
+	unsigned int i;
+	char value;
 
-    /* Code below does some arbitrary memory Reads & writes 
-       (c1m2 Assignment)*/
+    // Code below does some arbitrary memory Reads & writes 
+    // (c1m2 Assignment)
     clear_all(buffer, MAX_LENGTH);
     set_all( ( buffer + 8 ), 43, 2); 
     set_value(buffer, 0, 0x61);
@@ -55,12 +55,12 @@ int main(void) {
     set_value(buffer, 5, 0x5F);
 
     for ( i = 0; i < MAX_LENGTH; i++ ){
-      PRINTF("%c", buffer[i]);
+		PRINTF("%c", buffer[i]);
     }
     PRINTF("\n");
 
-  #endif
+	#endif
 
-  return 0;
+	return 0;
 }
 

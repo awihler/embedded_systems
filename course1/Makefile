@@ -23,7 +23,7 @@
 #
 # Build Targets:
 #   build	- Builds and links all source files into a final executable
-#		- Builds an objective directory if not already existing	
+#			- Builds output file directories if not already existing	
 #   clean	- Removes all generated files      
 #
 # Platform Overrides:
@@ -45,15 +45,15 @@
 #
 # Notes: 
 # 1)	To avoid linker errors, $(LDFLAGS) must preceed object files. 
-#	$(LDLIBS) (not currently used) should follow object files.
-# 2)	Generally both $(INCLUDE) and $(CFLAGS) should not be included in 
-#	the build recipe since the object compilation phase is already over.
-#	In this Make File:
-#	Compilation Recipe:  $(OBJ_DIR)/%.o
-#	Linking Recipe:  build: $(TARGET).out
-#	$(CFLAGS) $(INCLUDES) are included in both the compilation and linking 
-#	recipes to avoid to avoid the following error if $(PLATFORM)=MSP432:
-#	"error: filename.o uses VFP register arguments, $(TARGET).out does not"
+#		$(LDLIBS) (not currently used) should follow object files.
+# 2)	Generally both $(INCLUDE) and $(CFLAGS) should not be included in the 
+#		build recipe since the object compilation phase is already over.
+#		In this Make File $(CFLAGS) and $(INCLUDES) are included in both the 
+#       compilation and linking recipes to avoid the following error if
+#		$(PLATFORM)=MSP432:
+#		"error: filename.o uses VFP register arguments, $(TARGET).out does not"
+#		Compilation Recipe:  $(OBJ_DIR)/%.o
+#		Linking Recipe:  build: $(TARGET).out
 #------------------------------------------------------------------------------
 
 # Include other make files

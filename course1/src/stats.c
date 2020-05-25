@@ -30,101 +30,97 @@
 
 void print_array(unsigned char * data, unsigned int size){
 
-  #if defined (VERBOSE)  
-    int i; 
-    for(i=0; i<size; i++){
-      if(i == size-1){
-        PRINTF("%u \n", data[i]);
-      }else{
-        PRINTF("%u, ", data[i]);
-      }    
-    }
-  #endif
+	#if defined (VERBOSE)  
+	int i; 
+	for(i=0; i<size; i++){
+		if(i == size-1){
+			PRINTF("%u \n", data[i]);
+		}else{
+			PRINTF("%u, ", data[i]);
+		}    
+	}
+	#endif
 }
 
 void print_statistics(unsigned char * data, unsigned int size){
-  PRINTF("Mean    = %.0f \n", find_mean(data, size));
-  PRINTF("Median  = %.0f \n", find_median(data, size));
-  PRINTF("Maximum = %u \n", find_maximum(data, size));
-  PRINTF("Minimum = %u \n", find_minimum(data, size));
+	PRINTF("Mean    = %.0f \n", find_mean(data, size));
+	PRINTF("Median  = %.0f \n", find_median(data, size));
+	PRINTF("Maximum = %u \n", find_maximum(data, size));
+	PRINTF("Minimum = %u \n", find_minimum(data, size));
 }
 
 void sort_array(unsigned char * data, unsigned int size){
   
-  unsigned char temp;
-  int i, j;
+	unsigned char temp;
+	int i, j;
 
-  for(i=0; i < size-1; i++){
-    for(j=i+1; j < size; j++){
+	for(i=0; i < size-1; i++){
+		for(j=i+1; j < size; j++){
 
-      /* ascending: data[i] > data[j]    
-        descending: data[i] < data[j] */ 
-      if(data[i] < data[j]){
-        temp = data[i];
-        data[i] = data[j];
-        data[j] = temp;
-      }
-    }
-  }
+			// ascending: data[i] > data[j]    
+        	// descending: data[i] < data[j] 
+			if(data[i] < data[j]){
+				temp = data[i];
+       			data[i] = data[j];
+        		data[j] = temp;
+      		}
+    	}
+  	}
 }
 
 float find_mean(unsigned char * data, unsigned int size){
 
-  float sum = 0;
-  int i;
+	float sum = 0;
+	int i;
 
-  for(i=0; i < size; i++){
-    sum += data[i];
-  }
+	for(i=0; i < size; i++){
+		sum += data[i];
+	}
 
-  return (int)sum/size;
-
+	return (int)sum/size;
 }
 
 float find_median(unsigned char * data, unsigned int size){
 
-  float median;
+	float median;
 
-  sort_array(data, size);
+	sort_array(data, size);
 
-  if(size % 2 == 0){
-    median = (data[size/2] + data[size/2 - 1])/2.0;
-  }else{
-    median = data[size/2];
-  }
+	if(size % 2 == 0){
+		median = (data[size/2] + data[size/2 - 1])/2.0;
+	}else{
+    	median = data[size/2];
+  	}
  
-  return (int)median;
-
+  	return (int)median;
 }
 
 unsigned char find_maximum(unsigned char * data, unsigned int size){
 
-  unsigned int max = data[0];
-  int i;
+	unsigned int max = data[0];
+	int i;
 
-  for(i=0; i<size; i++){
-    if(data[i] > max){
-      max = data[i];
-    }
-  } 
+	for(i=0; i<size; i++){
+		if(data[i] > max){
+			max = data[i];
+    	}
+	} 
 
-  return max;
-
+	return max;
 }
 
 unsigned char find_minimum(unsigned char * data, unsigned int size){
 
-  unsigned int min = data[0];
-  int i;
+	unsigned int min = data[0];
+	int i;
 
-  for(i=0; i<size; i++){
-    if(data[i] < min){
-      min = data[i];
-    }
-  } 
+	for(i=0; i<size; i++){
+		if(data[i] < min){
+			min = data[i];
+		}
+	} 
 
-  return min;
-
+	return min;
 }
 
 

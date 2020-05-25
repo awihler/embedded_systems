@@ -59,13 +59,13 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
 	// Allocate dynamic memory
 	temp = (uint8_t*)reserve_words(length);
 	
-	for( i = 0; i < length; i++){
-	    *(temp + i ) = *( src + i );
+	for(i = 0; i < length; i++){
+	    *(temp + i) = *(src + i);
 	}
 
-	for( i = 0; i < length; i++){
-	    *(dst + i ) = *( temp + i );
-			}
+	for(i = 0; i < length; i++){
+	    *(dst + i) = *(temp + i);
+	}
 	
 	return dst;
 
@@ -77,8 +77,8 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
 	
 	uint8_t i = 0;
 
-	for( i = 0; i < length; i++){
-		*( dst + i ) = *( src + i );
+	for(i = 0; i < length; i++){
+		*(dst + i) = *(src + i);
 	}
 
 	return dst;
@@ -89,8 +89,8 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
 
 	uint8_t i = 0;	
 	
-	for( i = 0; i < length; i++){
-		*( src + i ) = value ;
+	for(i = 0; i < length; i++){
+		*(src + i) = value ;
 	}
 
 	return src;
@@ -99,7 +99,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
 
 uint8_t * my_memzero(uint8_t * src, size_t length) {
 
-	src = my_memset(src , length , 0 );
+	src = my_memset(src , length , 0);
 
 	return src;
 
@@ -112,8 +112,8 @@ uint8_t * my_reverse(uint8_t * src, size_t length) {
 
 	for (i = 0; i <= (length-1)/2; i++){
 		temp = *(src + i);
-		*(src + i) = *(src + length - i - 1);
-		*(src + length - i - 1) = temp;
+		*(src + i) = *(src + length-1 - i);
+		*(src + length-1 - i) = temp;
 	} 
 
 /*	uint8_t start=0;

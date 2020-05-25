@@ -24,8 +24,7 @@
 #include "stats.h"
 
 uint8_t my_itoa(int32_t data, uint8_t *ptr, uint32_t base) {
-	
-//	int32_t temp; 
+	 
 	char flag = 0;
 	uint8_t i = 0, length; 
 
