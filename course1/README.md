@@ -6,8 +6,9 @@
 This repository contains the: 
 **Peer-Graded Assignment: Week 4 Expanded Build System and Memory** \
 \
-This assignment reuses the version control repository from Week 1 and adds new c-programming functions that manipulate memory. The code is tested on the host machine, but should compile for both the target platform (MSP432) and host platform.  
-
+This assignment reuses the version control repository from Week 1 and adds new c-programming functions that manipulate memory. The code is tested on the host machine, but should compile for both the target platform (MSP432) and host platform. \
+\
+The Make file automatically orders all generated files into the appropriate folders (**pre**, **asm**, **obj**, **dep**).  The target output file (.out) is saved to the top of the project directory. 
 
 ### project directory structure
 
@@ -24,11 +25,12 @@ This assignment reuses the version control repository from Week 1 and adds new c
 	- *startup_msp432p401r_gcc.c* : Target embedded system files
 	- *system_msp432p401r.c* : Target embedded system files 
 - **include** (header files *.h)
+	- **common** : common headers for both platform targets
+	- **msp432** : MSP432 platform headers
+	- **CMSIS** : ARM architecture specific headers
 - **pre** (preprocessing files *.i)
 - **asm** (assembly files *.asm)
 - **obj** (object files *.o)
 - **dep** (dependencies *.d)
-\
-\
-The Make file has been modfied to automatically generate and order all generated files into the appropriate folders (**pre**, **asm**, **obj**, **dep**).  The target output file (.out) is saved to the top of the project directory. 
+
 

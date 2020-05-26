@@ -156,13 +156,13 @@ int8_t test_memmove1() {
 	PRINTF("\n");
 	PRINTF("--------------------------------\n");
 	PRINTF("my_memmove():\n");
-	PRINTF("\n	Initial pointer array elements: "); 
-	print_array(set, MEM_SET_SIZE_B);
-	PRINTF("\n");
-	PRINTF("	Address of starting pointer: %p\n", ptra);
+	PRINTF("\n  Address of starting pointer: %p\n", ptra);
 	PRINTF("	Value of starting pointer: %d\n", *ptra);
 	PRINTF("	Address of ending pointer: %p\n", ptrb);
 	PRINTF("	Value of ending pointer: %d\n", *ptrb);
+	PRINTF("	Move length: %d\n", TEST_MEMMOVE_LENGTH);
+	PRINTF("\n	Initial pointer array elements: "); 
+	print_array(set, MEM_SET_SIZE_B);
 	#endif
 
 	// Move byte pointer from source location to destination
@@ -223,13 +223,13 @@ int8_t test_memmove2() {
 	PRINTF("\n");
 	PRINTF("--------------------------------\n");
 	PRINTF("my_memmove():\n");
-	PRINTF("\n	Initial pointer array elements: "); 
-	print_array(set, MEM_SET_SIZE_B);
-	PRINTF("\n");
-	PRINTF("	Address of starting pointer: %p\n", ptra);
+	PRINTF("\n  Address of starting pointer: %p\n", ptra);
 	PRINTF("	Value of starting pointer: %d\n", *ptra);
 	PRINTF("	Address of ending pointer: %p\n", ptrb);
 	PRINTF("	Value of ending pointer: %d\n", *ptrb);
+	PRINTF("	Move length: %d\n", TEST_MEMMOVE_LENGTH);
+	PRINTF("\n	Initial pointer array elements: "); 
+	print_array(set, MEM_SET_SIZE_B);
 	#endif
 
 	// Move byte pointer from source location to destination
@@ -291,13 +291,13 @@ int8_t test_memmove3() {
 	PRINTF("\n");
 	PRINTF("--------------------------------\n");
 	PRINTF("my_memmove():\n");
-	PRINTF("\n	Initial pointer array elements: "); 
-	print_array(set, MEM_SET_SIZE_B);
-	PRINTF("\n");
-	PRINTF("	Address of starting pointer: %p\n", ptra);
+	PRINTF("\n  Address of starting pointer: %p\n", ptra);
 	PRINTF("	Value of starting pointer: %d\n", *ptra);
 	PRINTF("	Address of ending pointer: %p\n", ptrb);
 	PRINTF("	Value of ending pointer: %d\n", *ptrb);
+	PRINTF("	Move length: %d\n", TEST_MEMMOVE_LENGTH);
+	PRINTF("\n	Initial pointer array elements: "); 
+	print_array(set, MEM_SET_SIZE_B);
 	#endif
 
 	// Move byte pointer from source location to destination
@@ -358,17 +358,17 @@ int8_t test_memcopy() {
 	PRINTF("\n");
 	PRINTF("--------------------------------\n");
 	PRINTF("my_memcopy():\n");
-	PRINTF("\n	Initial pointer array elements: "); 
-	print_array(set, MEM_SET_SIZE_B);
-	PRINTF("\n");
-	PRINTF("	Address of starting pointer: %p\n", ptra);
+	PRINTF("\n	Address of starting pointer: %p\n", ptra);
 	PRINTF("	Value of starting pointer: %d\n", *ptra);
 	PRINTF("	Address of ending pointer: %p\n", ptrb);
 	PRINTF("	Value of ending pointer: %d\n", *ptrb);
+	PRINTF("	Move length: %d\n", TEST_MEMMOVE_LENGTH);
+	PRINTF("\n	Initial pointer array elements: "); 
+	print_array(set, MEM_SET_SIZE_B);
 	#endif
 
 	// Move byte pointer from source location to destination
-	my_memmove(ptra, ptrb, TEST_MEMMOVE_LENGTH);
+	my_memcopy(ptra, ptrb, TEST_MEMMOVE_LENGTH);
 
 	#ifdef VERBOSE
 	PRINTF("\n	Final pointer array elements: "); 
@@ -425,27 +425,27 @@ int8_t test_memset() {
 	#ifdef VERBOSE    
 	PRINTF("\n");
 	PRINTF("--------------------------------\n");
-	PRINTF("my_memcopy():\n");
-	PRINTF("\n	Initial pointer array elements: "); 
-	print_array(set, MEM_SET_SIZE_B);
-	PRINTF("\n");
-	PRINTF("	Address of starting pointer: %p\n", ptra);
+	PRINTF("my_memset():\n");
+	PRINTF("\n	Address of starting pointer: %p\n", ptra);
 	PRINTF("	Value of starting pointer: %d\n", *ptra);
 	PRINTF("	Address of ending pointer: %p\n", ptrb);
 	PRINTF("	Value of ending pointer: %d\n", *ptrb);
+	PRINTF("	Memory set value: %d\n", 0xFF);
+	PRINTF("\n	Initial pointer array elements: "); 
+	print_array(set, MEM_SET_SIZE_B);
 	#endif
   
 	my_memset(ptra, MEM_SET_SIZE_B, 0xFF);
 
 	#ifdef VERBOSE
-	PRINTF("\n	Final pointer array elements: "); 
+	PRINTF("\n	Pointer array after memory set: "); 
 	print_array(set, MEM_SET_SIZE_B);
 	#endif
 
 	my_memzero(ptrb, MEM_ZERO_LENGTH);
 
 	#ifdef VERBOSE
-	PRINTF("\n	Final pointer array elements: "); 
+	PRINTF("\n	Pointer array after zero memory set: "); 
 	print_array(set, MEM_SET_SIZE_B);
 	#endif
   
